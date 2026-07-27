@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contoh Website - GitHub Pages</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="navbar">
+      <span class="logo">MyWebsite</span>
+      <ul class="nav-links">
+        <li><a href="#about">Tentang</a></li>
+        <li><a href="#features">Fitur</a></li>
+        <li><a href="#game">Game</a></li>
+        <li><a href="#contact">Kontak</a></li>
+      </ul>
+      <button id="theme-toggle" aria-label="Ganti tema">🌙</button>
+    </nav>
+
+    <div class="hero-content">
+      <h1>Website Contoh, Online Gratis</h1>
+      <p>Dibuat dengan HTML, CSS, dan JavaScript murni. Di-host gratis pakai GitHub Pages.</p>
+      <a class="btn" href="#features">Lihat Fitur</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="section">
+      <h2>Tentang</h2>
+      <p>
+        Ini adalah contoh website statis sederhana yang bisa langsung kamu publish
+        ke internet secara gratis menggunakan GitHub Pages. Tidak perlu server,
+        tidak perlu biaya hosting.
+      </p>
+    </section>
+
+    <section id="features" class="section">
+      <h2>Fitur</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Gratis Selamanya</h3>
+          <p>GitHub Pages tidak memungut biaya untuk hosting website statis.</p>
+        </div>
+        <div class="card">
+          <h3>Auto Deploy</h3>
+          <p>Setiap kali push ke branch yang dipilih, website otomatis update.</p>
+        </div>
+        <div class="card">
+          <h3>Interaktif</h3>
+          <p>Coba tombol di bawah ini, dijalankan dengan JavaScript.</p>
+          <button id="counter-btn">Diklik: 0 kali</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="game" class="section">
+      <h2>Main Yuk!</h2>
+      <p>Pilih hewan peliharaanmu, lalu kasih makan supaya dia tetap senang dan kenyang.</p>
+
+      <div id="animal-select" class="animal-grid">
+        <button class="animal-choice" data-name="Anjing" data-emoji="🐶">
+          <span class="animal-emoji">🐶</span>
+          <span>Anjing</span>
+        </button>
+        <button class="animal-choice" data-name="Kucing" data-emoji="🐱">
+          <span class="animal-emoji">🐱</span>
+          <span>Kucing</span>
+        </button>
+        <button class="animal-choice" data-name="Tokek" data-emoji="🦎">
+          <span class="animal-emoji">🦎</span>
+          <span>Tokek</span>
+        </button>
+        <button class="animal-choice" data-name="Kelinci" data-emoji="🐰">
+          <span class="animal-emoji">🐰</span>
+          <span>Kelinci</span>
+        </button>
+        <button class="animal-choice" data-name="Hamster" data-emoji="🐹">
+          <span class="animal-emoji">🐹</span>
+          <span>Hamster</span>
+        </button>
+        <button class="animal-choice" data-name="Burung" data-emoji="🐤">
+          <span class="animal-emoji">🐤</span>
+          <span>Burung</span>
+        </button>
+      </div>
+
+      <div id="pet-stage" class="pet-stage hidden">
+        <button id="change-pet" class="link-btn">← Ganti hewan</button>
+        <p id="pet-name" class="pet-name">Anjing</p>
+        <p id="pet-mood" class="pet-mood">Senang</p>
+
+        <div id="play-area" class="play-area">
+          <div id="pet-emoji" class="pet-emoji">🐶</div>
+          <div id="food-emoji" class="food-emoji">🍖</div>
+        </div>
+        <p class="drag-hint">Seret 🍖 ke arah hewannya untuk kasih makan</p>
+
+        <div class="hunger-bar-wrap">
+          <div id="hunger-bar" class="hunger-bar"></div>
+        </div>
+        <p id="hunger-label" class="hunger-label">Kenyang: 50%</p>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Kontak</h2>
+      <p>Punya pertanyaan? Hubungi kami di <a href="mailto:it@maipark.com">it@maipark.com</a>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> MyWebsite. Dibuat untuk contoh publikasi GitHub Pages.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

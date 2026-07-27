@@ -1,0 +1,531 @@
+/* ============ Reset & Base ============ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0f1120;
+  --bg-alt: #161a30;
+  --text: #f4f4fb;
+  --text-muted: #b9bcd4;
+  --primary: #7c5cff;
+  --primary-light: #a78bff;
+  --accent: #29d9c8;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --radius: 16px;
+  --transition: 0.3s ease;
+}
+
+body.light {
+  --bg: #f7f7fb;
+  --bg-alt: #ffffff;
+  --text: #1b1c2b;
+  --text-muted: #55597a;
+  --primary: #6c4bff;
+  --primary-light: #8a6bff;
+  --accent: #0fa89a;
+  --card-bg: #ffffff;
+  --card-border: rgba(20, 20, 40, 0.08);
+  --shadow: 0 10px 30px rgba(20, 20, 50, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background var(--transition), color var(--transition);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ============ Hero & Navbar ============ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(124, 92, 255, 0.35), transparent 45%),
+    radial-gradient(circle at 85% 15%, rgba(41, 217, 200, 0.25), transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(124, 92, 255, 0.2), transparent 50%),
+    var(--bg);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--card-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--card-border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at 50% 30%, black, transparent 70%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  backdrop-filter: blur(12px);
+  background: rgba(15, 17, 32, 0.35);
+  border-bottom: 1px solid var(--card-border);
+}
+
+body.light .navbar {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, var(--primary-light), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  position: relative;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+#theme-toggle {
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition), background var(--transition);
+}
+
+#theme-toggle:hover {
+  transform: rotate(20deg) scale(1.08);
+}
+
+.hero-content {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  z-index: 1;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  max-width: 820px;
+  background: linear-gradient(120deg, var(--text) 40%, var(--primary-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rise 0.8s ease both;
+}
+
+.hero-content p {
+  margin-top: 1.2rem;
+  max-width: 560px;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  animation: rise 0.8s ease 0.15s both;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 2.2rem;
+  padding: 0.9rem 2.2rem;
+  font-weight: 600;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  box-shadow: 0 8px 24px rgba(124, 92, 255, 0.35);
+  transition: transform var(--transition), box-shadow var(--transition);
+  animation: rise 0.8s ease 0.3s both;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(124, 92, 255, 0.5);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============ Sections ============ */
+.section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  position: relative;
+  display: inline-block;
+}
+
+.section h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 48px;
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.section > p {
+  color: var(--text-muted);
+  max-width: 680px;
+  font-size: 1.05rem;
+}
+
+/* ============ Cards ============ */
+.cards {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary-light);
+}
+
+.card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
+  color: var(--primary-light);
+}
+
+.card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+#counter-btn {
+  margin-top: 1.2rem;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+#counter-btn:hover {
+  transform: scale(1.05);
+}
+
+#counter-btn:active {
+  transform: scale(0.97);
+}
+
+/* ============ Game: Kasih Makan Hewan ============ */
+.hidden {
+  display: none !important;
+}
+
+.animal-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  gap: 0.9rem;
+  max-width: 480px;
+}
+
+.animal-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 1rem 0.5rem;
+  min-height: 88px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.animal-choice:active {
+  transform: scale(0.95);
+}
+
+.animal-choice:hover,
+.animal-choice:focus-visible {
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow);
+}
+
+.animal-emoji {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.pet-stage {
+  margin-top: 2rem;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.link-btn {
+  align-self: flex-start;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.4rem 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.link-btn:hover {
+  color: var(--primary-light);
+}
+
+.play-area {
+  position: relative;
+  width: 100%;
+  height: 210px;
+  margin-top: 1rem;
+  border-radius: var(--radius);
+  border: 1px dashed var(--card-border);
+  background: linear-gradient(180deg, transparent, rgba(124, 92, 255, 0.06));
+  overflow: hidden;
+  touch-action: none;
+}
+
+.pet-emoji {
+  position: absolute;
+  left: 30%;
+  top: 45%;
+  font-size: 3.2rem;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  transition: transform 0.25s ease;
+  user-select: none;
+  pointer-events: none;
+}
+
+.pet-emoji.bounce {
+  animation: pet-bounce 0.5s ease;
+}
+
+@keyframes pet-bounce {
+  0% { transform: translate(-50%, -50%) scale(1) translateY(0); }
+  30% { transform: translate(-50%, -50%) scale(1.2) translateY(-12px); }
+  60% { transform: translate(-50%, -50%) scale(0.95) translateY(0); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.food-emoji {
+  position: absolute;
+  left: 72%;
+  top: 72%;
+  font-size: 2.3rem;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  transition: left 0.15s ease, top 0.15s ease;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.food-emoji.dragging {
+  transition: none;
+  cursor: grabbing;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+}
+
+.drag-hint {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.pet-name {
+  margin-top: 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.pet-mood {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 0.2rem;
+}
+
+.hunger-bar-wrap {
+  width: 100%;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--card-border);
+  overflow: hidden;
+  margin-top: 1.4rem;
+}
+
+.hunger-bar {
+  height: 100%;
+  width: 50%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width 0.4s ease, background 0.4s ease;
+}
+
+.hunger-bar.low {
+  background: linear-gradient(90deg, #ff6b6b, #ff9d6b);
+}
+
+.hunger-label {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ============ Contact ============ */
+#contact a {
+  color: var(--primary-light);
+  font-weight: 600;
+  border-bottom: 1px solid currentColor;
+}
+
+/* ============ Footer ============ */
+footer {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--card-border);
+  background: var(--bg-alt);
+  font-size: 0.9rem;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 640px) {
+  .navbar {
+    padding: 1rem 1.2rem;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .nav-links {
+    gap: 1.2rem;
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section {
+    padding: 4rem 1.2rem;
+  }
+}
