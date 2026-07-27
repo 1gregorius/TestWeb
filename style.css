@@ -6,31 +6,18 @@
 }
 
 :root {
-  --bg: #0f1120;
-  --bg-alt: #161a30;
-  --text: #f4f4fb;
-  --text-muted: #b9bcd4;
-  --primary: #7c5cff;
-  --primary-light: #a78bff;
-  --accent: #29d9c8;
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --card-border: rgba(255, 255, 255, 0.1);
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --bg: #fbf6ef;
+  --bg-alt: #ffffff;
+  --text: #4f4235;
+  --text-muted: #8a7a6a;
+  --primary: #e58a5b;
+  --primary-light: #f2a985;
+  --accent: #5a8b83;
+  --card-bg: #ffffff;
+  --card-border: rgba(79, 66, 53, 0.1);
+  --shadow: 0 10px 30px rgba(79, 66, 53, 0.08);
   --radius: 16px;
   --transition: 0.3s ease;
-}
-
-body.light {
-  --bg: #f7f7fb;
-  --bg-alt: #ffffff;
-  --text: #1b1c2b;
-  --text-muted: #55597a;
-  --primary: #6c4bff;
-  --primary-light: #8a6bff;
-  --accent: #0fa89a;
-  --card-bg: #ffffff;
-  --card-border: rgba(20, 20, 40, 0.08);
-  --shadow: 0 10px 30px rgba(20, 20, 50, 0.08);
 }
 
 html {
@@ -60,33 +47,6 @@ img {
   display: block;
 }
 
-/* ============ Hero & Navbar ============ */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background:
-    radial-gradient(circle at 15% 20%, rgba(124, 92, 255, 0.35), transparent 45%),
-    radial-gradient(circle at 85% 15%, rgba(41, 217, 200, 0.25), transparent 40%),
-    radial-gradient(circle at 50% 90%, rgba(124, 92, 255, 0.2), transparent 50%),
-    var(--bg);
-  overflow: hidden;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--card-border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--card-border) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(circle at 50% 30%, black, transparent 70%);
-  opacity: 0.5;
-  pointer-events: none;
-}
-
 .navbar {
   position: sticky;
   top: 0;
@@ -96,12 +56,8 @@ img {
   justify-content: space-between;
   padding: 1.25rem 2rem;
   backdrop-filter: blur(12px);
-  background: rgba(15, 17, 32, 0.35);
+  background: rgba(251, 246, 239, 0.6);
   border-bottom: 1px solid var(--card-border);
-}
-
-body.light .navbar {
-  background: rgba(255, 255, 255, 0.55);
 }
 
 .logo {
@@ -164,67 +120,6 @@ body.light .navbar {
   transform: rotate(20deg) scale(1.08);
 }
 
-.hero-content {
-  position: relative;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 3rem 1.5rem;
-  z-index: 1;
-}
-
-.hero-content h1 {
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  max-width: 820px;
-  background: linear-gradient(120deg, var(--text) 40%, var(--primary-light));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: rise 0.8s ease both;
-}
-
-.hero-content p {
-  margin-top: 1.2rem;
-  max-width: 560px;
-  color: var(--text-muted);
-  font-size: 1.1rem;
-  animation: rise 0.8s ease 0.15s both;
-}
-
-.btn {
-  display: inline-block;
-  margin-top: 2.2rem;
-  padding: 0.9rem 2.2rem;
-  font-weight: 600;
-  border-radius: 999px;
-  color: #fff;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  box-shadow: 0 8px 24px rgba(124, 92, 255, 0.35);
-  transition: transform var(--transition), box-shadow var(--transition);
-  animation: rise 0.8s ease 0.3s both;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(124, 92, 255, 0.5);
-}
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* ============ Sections ============ */
 .section {
   max-width: 1000px;
@@ -265,12 +160,19 @@ body.light .navbar {
   font-size: 1.05rem;
 }
 
-/* ============ Cards ============ */
+/* ============ Cards & Gallery ============ */
 .cards {
   margin-top: 2.5rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
+}
+
+.gallery-item {
+  padding: 0; /* Hapus padding dari kartu galeri */
+  overflow: hidden; /* Pastikan gambar tidak keluar dari border-radius */
+  display: block;
+  cursor: pointer;
 }
 
 .card {
@@ -287,6 +189,13 @@ body.light .navbar {
   border-color: var(--primary-light);
 }
 
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
 .card h3 {
   font-size: 1.15rem;
   margin-bottom: 0.6rem;
@@ -298,31 +207,92 @@ body.light .navbar {
   font-size: 0.95rem;
 }
 
-#counter-btn {
-  margin-top: 1.2rem;
-  padding: 0.6rem 1.4rem;
-  border: none;
-  border-radius: 999px;
-  font-weight: 600;
-  cursor: pointer;
-  color: #fff;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-
-#counter-btn:hover {
+.gallery-item:hover img {
   transform: scale(1.05);
 }
 
-#counter-btn:active {
-  transform: scale(0.97);
+/* Button styles, moved from hero section */
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2.2rem;
+  font-weight: 600;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  box-shadow: 0 8px 24px rgba(229, 138, 91, 0.35);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
-/* ============ Contact ============ */
-#contact a {
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(229, 138, 91, 0.5);
+}
+
+#comment-form .btn {
+  margin-top: 1rem; /* Add margin for the form button */
+}
+
+/* ============ Comments Section ============ */
+#comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 680px;
+  margin: 2.5rem auto 0;
+}
+
+#comment-form input,
+#comment-form textarea {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--card-border);
+  background: var(--bg-alt);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+#comment-form input:focus,
+#comment-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light-transparent, rgba(124, 92, 255, 0.2));
+}
+
+#comment-form .btn {
+  align-self: flex-start;
+  margin-top: 1rem;
+}
+
+.comments-container {
+  margin-top: 3rem;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.comment {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  animation: comment-appear 0.6s ease forwards;
+}
+
+.comment strong {
   color: var(--primary-light);
-  font-weight: 600;
-  border-bottom: 1px solid currentColor;
+}
+
+.comment small {
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
 }
 
 /* ============ Footer ============ */
@@ -333,6 +303,73 @@ footer {
   border-top: 1px solid var(--card-border);
   background: var(--bg-alt);
   font-size: 0.9rem;
+}
+
+/* ============ Lightbox ============ */
+.lightbox {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(48, 38, 27, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-content {
+  max-width: 90%;
+  max-height: 85%;
+  border-radius: var(--radius);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9);
+  transition: transform 0.4s ease;
+}
+
+.lightbox.active .lightbox-content {
+  transform: scale(1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 2rem;
+  right: 2.5rem;
+  color: var(--text);
+  font-size: 3rem;
+  font-weight: 300;
+  cursor: pointer;
+  transition: transform var(--transition);
+}
+
+.lightbox-close:hover {
+  transform: scale(1.1);
+}
+
+/* ============ Animations ============ */
+@keyframes comment-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body.lightbox-open {
+  overflow: hidden;
 }
 
 /* ============ Responsive ============ */
