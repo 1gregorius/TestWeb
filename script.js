@@ -5,6 +5,17 @@ if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear();
 }
 
+// --- Admin Mode Logic ---
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('admin') === 'true') {
+  // Gunakan sessionStorage agar mode admin tidak permanen, hilang saat tab ditutup
+  sessionStorage.setItem('isAdmin', 'true');
+  // Hapus parameter dari URL agar tidak tersebar saat di-copy
+  window.history.replaceState({}, document.title, window.location.pathname);
+}
+const isAdmin = () => sessionStorage.getItem('isAdmin') === 'true';
+
+
 // --- Comment Section Logic ---
 const commentForm = document.getElementById('comment-form');
 const commentsList = document.getElementById('comments-list');
@@ -13,6 +24,8 @@ const commentsList = document.getElementById('comments-list');
 const renderComment = (comment) => {
   const commentElement = document.createElement('div');
   commentElement.classList.add('comment');
+  // Beri ID unik untuk mempermudah penghapusan dari DOM
+  commentElement.id = `comment-${comment.timestamp}`;
 
   const timestamp = new Date(comment.timestamp).toLocaleString('id-ID', {
     day: 'numeric',
@@ -22,8 +35,13 @@ const renderComment = (comment) => {
     minute: '2-digit',
   });
 
+  // Tampilkan tombol hapus jika mode admin aktif
+  const deleteButtonHTML = isAdmin()
+    ? `<button class="delete-btn" data-timestamp="${comment.timestamp}" title="Hapus Komentar">&times;</button>`
+    : '';
+
   commentElement.innerHTML = `
-    <p><strong>${comment.name}</strong></p>
+    <div class="comment-header"><strong>${comment.name}</strong> ${deleteButtonHTML}</div>
     <p>${comment.text}</p>
     <small>${timestamp}</small>
   `;
@@ -64,6 +82,28 @@ if (commentForm) {
   // Memuat komentar yang sudah ada saat halaman dibuka
   loadComments();
 }
+
+// Fungsi untuk menghapus komentar
+const deleteComment = (timestamp) => {
+  let savedComments = JSON.parse(localStorage.getItem('comments')) || [];
+  const updatedComments = savedComments.filter(c => c.timestamp !== timestamp);
+  localStorage.setItem('comments', JSON.stringify(updatedComments));
+
+  // Hapus elemen dari halaman tanpa perlu reload
+  const commentElement = document.getElementById(`comment-${timestamp}`);
+  if (commentElement) {
+    commentElement.remove();
+  }
+};
+
+// Event listener untuk tombol hapus (menggunakan event delegation)
+commentsList.addEventListener('click', (e) => {
+  if (e.target.classList.contains('delete-btn')) {
+    if (confirm('Yakin mau hapus komentar ini?')) {
+      deleteComment(e.target.dataset.timestamp);
+    }
+  }
+});
 
 // --- Scroll Animation for Sections ---
 const sections = document.querySelectorAll('.section');
